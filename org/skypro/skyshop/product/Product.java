@@ -1,19 +1,46 @@
 package org.skypro.skyshop.product;
-        public abstract class Product {
-            private String name;
 
-            public Product(String name) {
-                this.name = name;
-            }
 
-            public String getName() {
-                return name;
-            }
+import org.skypro.skyshop.search.Searchable;
 
-            public abstract double getPrice();
+public abstract class Product implements Searchable {
+    private final String name;
+    private final double price;
 
-            public abstract boolean isSpecial();
-        }
+    public Product(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    @Override
+    public String getSearchTerm() {
+        // По условию: возвращаем имя товара
+        return name;
+    }
+
+    @Override
+    public String getContentType() {
+        return "PRODUCT";
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    // toString оставляем для вывода в корзине, как требует условие
+    @Override
+    public String toString() {
+        return name + " — " + price + " руб.";
+    }
+}
+
+
+        
 
 
 
